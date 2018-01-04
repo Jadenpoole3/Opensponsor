@@ -7,5 +7,3 @@ I created a Athlete profile where you can go to a Athlete and follow them. Then 
 # Heroku 
 https://opensponsor2.herokuapp.com/
 
-
-# Wireframes 
