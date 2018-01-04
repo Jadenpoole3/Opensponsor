@@ -1,72 +1,64 @@
 const express = require('express')
 const router = express.Router()
+const {Athlete} = require('../db/schema')
 
-const Schema = require('../db/schema.js')
-const { Athlete } = Schema
-
-
-
-//get all the athletes  index Route 
-router.get('/', async (req, res) => {
+router.get('/',  async (req,res)=> {
     try {
-      const athletes = await Athlete.find({})
-      res.json(athletes)
+        const athletes = await Athlete.find({})
+        res.json(athletes)
+        
     } catch (err) {
-      console.log(err)
+        res.send(err)
     }
-  })
+   
 
-  //Show Route 
-  router.get('/:id', async (req, res) => {
+})
+// 
+router.get('/:id', async (req,res) => {
     try {
-      const athleteId = req.params.id
-      const athlete = await Athlete.findById(athleteId)
-      res.json(athlete)
+        const athlete = await Athlete.findById(req.params.id)
+        res.json(athlete)
     } catch (err) {
-      console.log(err)
-      res.json(err)
+        res.send(err)
     }
-  })
+    
+})
 
-// Create Route 
-  router.post('/', async (req, res) => {
+
+//Create
+router.post('/', async (req, res) => {
     try {
-      const newAthlete = req.body
-      const savedAthlete = await Athlete.create(newAthlete)
-      res.json(savedAthlete)
-    } catch (err) {
-      console.log(err)
-      res.status(500).json(err)
-    }
-  })
+        const newAthlete = new Athlete (req.body.user)
+        const saved = await newUser.save()
+        res.json(saved)
 
-  //Update Route
-  router.put('/:id', async (req, res) => {
+    } catch (err) {
+        res.send(err)
+    }
+})
+
+router.patch('/:id', async (req, res) => {
+    try{
+        const updatedAthlete = req.body.athlete
+        const athleteId = req.params.id
+        const athlete = await Athlete.findByIdAndUpdate(athleteId, updatedAthlete, {new: true})
+        res.json(athlete) 
+    } catch (err) {
+        console.log(err)
+        res.send(err)
+    }
+})
+
+//Delete Route
+router.delete('/:id', async (req, res) => {
     try {
-      const athleteId = req.params.id
-      const updatedAthlete = req.body
-      const savedAthlete = await Athlete.findByIdAndUpdate(athleteId, updatedAthlete)
-      res.json(savedAthlete)
-    } catch (err) {
-      console.log(err)
-      res.status(500).json(err)
+        const athleteId = req.params.id;
+        const deleted = await User.findByIdAndRemove(athleteId)
+        res.json(deleted)
     }
-  })
-
-  // Delete Route
-  router.delete('/:id', async (req, res) => {
-    try {
-      const athleteId = req.params.id
-      await Athlete.findByIdAndRemove(athleteId)
-      res.json({
-        msg: 'Successfully Deleted'
-      })
-    } catch (err) {
-      console.log(err)
-      res.status(500).json(err)
+    catch (err) {
+        res.send(err)
     }
-  })
+})
 
-
-
-  module.exports = router
+module.exports = router

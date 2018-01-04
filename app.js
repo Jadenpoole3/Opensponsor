@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const app = express()
+const athleteController = require('./routes/athleteController')
 
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true})
@@ -22,8 +23,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.static(`${__dirname}/client/build`))
 
-const athleteRoutes = require('./routes/athleteController')
-app.use('/api/athletes', athleteRoutes)
+app.use('/api/athletes', athleteController)
 
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/client/build/index.html`)
