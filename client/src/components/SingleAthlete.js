@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {Redirect} from 'react-router-dom'
+import FaTwitterSquare from 'react-icons/lib/fa/twitter-square'
+import styled from 'styled-components';
+
+
+const AthleteProfile = styled.div`
+
+
+
+`
 
 class SingleAthlete extends Component {
   state = {
@@ -48,13 +57,16 @@ deleteUser = async (user) => {
   render() {
     return (
       <div>
-      <h1> Users Profile </h1>
+      <h1> Athlete Profile </h1>
       <img src={this.state.athlete.image}/>
-      <h1>{this.state.athlete.name}</h1>
+      <h1>  Gender: {this.state.athlete.gender} </h1>
+      <h1>  Nationality: {this.state.athlete.nationality} </h1>
+      <h1> Bio: {this.state.athlete.description} </h1>
+      <h1>  Sport: {this.state.athlete.sport} </h1>
 
-      
-      
-     
+
+
+
   </div>
     );
   }

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 
 
+
 class EditPage extends Component {
     state = {
         athlete: {},
@@ -78,6 +79,8 @@ class EditPage extends Component {
         <button>Edit</button>
             </form>
             </div>
+
+
         );
     }
 }
