@@ -28,8 +28,8 @@ router.get('/:id', async (req,res) => {
 //Create
 router.post('/', async (req, res) => {
     try {
-        const newAthlete = new Athlete (req.body.user)
-        const saved = await newUser.save()
+        const newAthlete = new Athlete (req.body.athlete)
+        const saved = await newAthlete.save()
         res.json(saved)
 
     } catch (err) {

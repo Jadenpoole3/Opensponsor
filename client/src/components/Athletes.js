@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {Redirect} from 'react-router-dom'
 import styled from 'styled-components';
+import NewAthleteForm from './NewAthleteForm'
 
 const AthleteStyles = styled.div`
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,600);
@@ -35,7 +36,7 @@ const AthleteStyles = styled.div`
   width: 100%;
   background-color: #141414;
   padding: 25px;
-  position: relative;
+  position: center;
 }
 .snip1336 figcaption:before {
   position: absolute;
@@ -107,6 +108,7 @@ margin-right: 4%;
 class Athletes extends Component {
     state = {
         athletes: [],
+        showNewForm: false
     }
 
     static defaultProps = {
@@ -124,7 +126,9 @@ class Athletes extends Component {
    
     }
 
-  
+    toggleShowNewForm = () => {
+      this.setState({showNewForm: !this.state.showNewForm})
+    }
     
 
     render() {
@@ -135,6 +139,7 @@ class Athletes extends Component {
         {this.state.athletes.map(athlete => (
            <div>
             <AthleteStyles>
+           
             <figure className="snip1336">
                         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87" />
                         <figcaption>
@@ -148,11 +153,15 @@ class Athletes extends Component {
                             <Link to={`/athletes/${athlete._id}`} className="follow">Follow</Link>
                             {/* <Link to={`/athletes/${athlete.id}/ActionPage`} className="info">Action Items</Link> */}
                             <Link to={`/athletes/${athlete._id}/edit`} >Edit</Link>
-                           
+                            <Link to={`/NewAthlete`}>New </Link>
                         </figcaption>
-
                     </figure>
+
 </AthleteStyles> 
+{/* <button onClick={this.toggleShowNewForm}>Create New</button>
+
+{this.state.showNewForm ? <NewAthleteForm getAllAthletes={this.getAllAthletes}/> : null} */}
+
           
 
             </div>
